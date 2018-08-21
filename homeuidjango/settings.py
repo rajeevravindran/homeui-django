@@ -25,7 +25,7 @@ SECRET_KEY = 'lh3qi&3-)bkeu1)^oy2huy-#wgf%3nf6ltss=&@z21&%#9-cn5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.107']
+ALLOWED_HOSTS = ['192.168.0.107','localhost']
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['192.168.0.107']
 INSTALLED_APPS = [
     'homeservices',
     'dashboard',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

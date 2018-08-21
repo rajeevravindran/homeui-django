@@ -18,10 +18,13 @@ class AlarmEvent(models.Model):
         return self.AlarmName + " : " + str(self.AlarmTime)
 
     def save(self,*args,**kwargs):
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-        channel = connection.channel()
-        channel.queue_declare(queue='alarm')
-        channel.basic_publish(exchange='',
-                              routing_key='alarm',
-                              body=startAlarm(self.AlarmTime,"/home/pi/rocky.mp3"))
+        try:
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+            channel = connection.channel()
+            channel.queue_declare(queue='alarm')
+            channel.basic_publish(exchange='',
+                                  routing_key='alarm',
+                                  body=startAlarm(self.AlarmTime,"/home/pi/rocky.mp3"))
+        except:
+            print("Something wrong in connecting to RabbitMQ. Alarm not active")
         super(AlarmEvent,self).save(*args,**kwargs)
